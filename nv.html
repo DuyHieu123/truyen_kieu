@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhân vật | Hệ thống điển hình</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --accent: #000000; 
+            --bg-main: #ffc7c7; 
+            --bg-card: #ffc7c7; 
+            --bg-card-hover: #ffd3d3;
+            --border-color: #ffb6b6;
+            --text-dark: #1b1919;
+            --modal-bg: #ffffff;
+        }
+
+        body { 
+            background: var(--bg-main); 
+            color: var(--accent); 
+            font-family: 'Montserrat', sans-serif; 
+            margin: 0; 
+            padding: 40px 5%; 
+            line-height: 1.6;
+        }
+
+        /* --- Header & Banner --- */
+        .header { margin-bottom: 60px; }
+        
+        .back-btn { 
+            text-decoration: none; 
+            color: var(--accent); 
+            font-size: 0.8rem; 
+            text-transform: uppercase; 
+            font-weight: 700;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 5px;
+            transition: 0.3s;
+        }
+        .back-btn:hover { opacity: 0.6; }
+
+        h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(2.5rem, 8vw, 6rem); 
+            margin: 30px 0; 
+            line-height: 1; 
+            text-transform: uppercase;
+        }
+
+        .main-banner {
+            width: 100%;
+            border: 2px solid var(--accent);
+            padding: 8px;
+            background: white;
+            margin-bottom: 50px;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: 0.5s;
+        }
+
+        .image-caption {
+            margin-top: 15px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* --- Grid & Cards --- */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .char-card {
+            background-color: var(--bg-card);
+            padding: 40px 30px;
+            border: 1px solid var(--accent);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .char-card:hover {
+            background-color: var(--bg-card-hover);
+            transform: translateY(-10px);
+            box-shadow: 10px 10px 0px var(--accent);
+        }
+
+        .char-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .char-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin: 0 0 15px 0;
+            line-height: 1.1;
+        }
+
+        .char-desc {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .char-quote {
+            padding-top: 15px;
+            border-top: 1px solid var(--accent);
+            font-style: italic;
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        /* --- Modal System --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 9999; 
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background-color: var(--modal-bg);
+            margin: 2% auto;
+            padding: 50px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            border: 3px solid var(--accent);
+            box-shadow: 20px 20px 0px var(--bg-main);
+        }
+
+        .close {
+            position: sticky;
+            top: -20px;
+            float: right;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-detail-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 5px;
+        }
+
+        .modal-detail-subtitle {
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #555;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .modal-body-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #222;
+        }
+
+        .modal-body-text strong { color: #e91e63; }
+
+        /* --- Timeline nội bộ --- */
+        .timeline-container {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--bg-main);
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid var(--bg-main);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .t-period {
+            font-weight: 700;
+            color: #d63384;
+            font-size: 0.9rem;
+            min-width: 120px;
+            text-transform: uppercase;
+        }
+
+        .t-content h4 {
+            margin: 0 0 5px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+        }
+
+        .t-content p {
+            margin: 0;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        .footer {
+            margin-top: 100px;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--accent);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 600px) {
+            .modal-content { padding: 30px; margin: 5% auto; width: 85%; }
+            .modal-detail-title { font-size: 2rem; }
+            .timeline-item { flex-direction: column; padding-left: 20px; }
+            .t-period { margin-bottom: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="back-btn">← Quay lại mục lục</a>
+        <h1>Hình tượng<br>Nhân vật</h1>
+        
+        <div class="main-banner">
+            <img src="images/bìa.png" alt="Bìa nhân vật" class="featured-image">
+            <div class="image-caption">Hệ thống nhân vật điển hình trong Truyện Kiều</div>
+        </div>
+    </header>
+
+    <main class="char-grid">
+        <div class="char-card" onclick="openModal('kieu')">
+            <span class="char-num">01</span>
+            <h2 class="char-name">Thúy Kiều</h2>
+            <p class="char-desc">Bậc tài nữ vẹn toàn nhưng mang số kiếp "hồng nhan bạc mệnh", biểu tượng cho nỗi đau và vẻ đẹp tâm hồn con người.</p>
+            <div class="char-quote">"Làn thu thủy, nét xuân sơn..."</div>
+        </div>
+
+        <div class="char-card" onclick="openModal('kim')">
+            <span class="char-num">02</span>
+            <h2 class="char-name">Kim Trọng</h2>
+            <p class="char-desc">Hình mẫu lý tưởng của bậc tài tử phong lưu, đa tình và thủy chung son sắt.</p>
+            <div class="char-quote">"Vào trong phong nhã, ra ngoài hào hoa."</div>
+        </div>
+
+        <div class="char-card" onclick="openModal('hai')">
+            <span class="char-num">03</span>
+            <h2 class="char-name">Từ Hải</h2>
+            <p class="char-desc">Người anh hùng đội trời đạp đất, hiện thân của khát vọng tự do và công lý.</p>
+            <div class="char-quote">"Chọc trời khuấy nước mặc dầu..."</div>
+        </div>
+
+        <div class="char-card" onclick="openModal('hoan')">
+            <span class="char-num">04</span>
+            <h2 class="char-name">Hoạn Thư</h2>
+            <p class="char-desc">Người phụ nữ sắc sảo, khôn ngoan, đại diện cho tiếng nói ghen tuông đầy bản lĩnh.</p>
+            <div class="char-quote">"Bề ngoài thơn thớt nói cười..."</div>
+        </div>
+
+        <div class="char-card" onclick="openModal('so')">
+            <span class="char-num">05</span>
+            <h2 class="char-name">Sở Khanh</h2>
+            <p class="char-desc">Kẻ lừa đảo đê tiện, hiện thân của thói hư tật xấu và sự giả dối trong xã hội.</p>
+            <div class="char-quote">"Hình dong chải chuốt mượt mà..."</div>
+        </div>
+
+        <div class="char-card" onclick="openModal('van')">
+            <span class="char-num">06</span>
+            <h2 class="char-name">Thúy Vân</h2>
+            <p class="char-desc">Vẻ đẹp phúc hậu, hài hòa, mang số mệnh bình yên đối lập với chị mình.</p>
+            <div class="char-quote">"Mây thua nước tóc tuyết nhường màu da."</div>
+        </div>
+    </main>
+
+    <div id="charModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        THỰC HIỆN: <strong>Trần Duy Hiếu</strong> — 2026 — DỰ ÁN TRUYỆN KIỀU DIGITAL
+    </footer>
+
+    <script>
+        const charData = {
+            'kieu': {
+                title: "Thúy Kiều",
+                subtitle: "Đỉnh cao bi kịch của tài hoa và bạc mệnh",
+                content: `
+                    <p><strong>Nhan sắc và Tài năng:</strong> Thúy Kiều được Nguyễn Du khắc họa là một tuyệt thế giai nhân. Nàng không chỉ có vẻ đẹp khiến "hoa ghen, liễu hờn" mà còn tinh thông cầm, kỳ, thi, họa. Bản đàn "Bạc mệnh" nàng tự sáng tác chính là tiếng lòng dự báo cho một kiếp người đầy sóng gió.</p>
+                    <p><strong>Nhân cách cao thượng:</strong> Trong cơn gia biến, Kiều đã hy sinh tình yêu cá nhân (với Kim Trọng) để làm tròn chữ Hiếu. Suốt 15 năm lưu lạc, dù bị vùi dập trong bùn đen, nàng vẫn giữ vững lòng tự trọng, sự thủy chung và lòng vị tha sâu sắc.</p>
+                    <p><strong>Bi kịch đoạn trường:</strong> Cuộc đời nàng là bản cáo trạng đanh thép tố cáo xã hội phong kiến tàn bạo, nơi đồng tiền có sức mạnh vạn năng chà đạp lên nhân phẩm con người.</p>
+                `,
+                timeline: [
+                    { period: "Khởi đầu", title: "Tiết Thanh Minh", desc: "Gặp gỡ Kim Trọng, đính ước tình lứa đôi." },
+                    { period: "Gia biến", title: "Bán mình chuộc cha", desc: "Từ biệt tình quân, bắt đầu kiếp đời lưu lạc." },
+                    { period: "Vùi dập", title: "Thanh lâu hai lượt", desc: "Rơi vào tay Mã Giám Sinh, Tú Bà, Sở Khanh." },
+                    { period: "Công lý", title: "Gặp gỡ Từ Hải", desc: "Báo thù rửa hận, hưởng hạnh phúc ngắn ngủi." },
+                    { period: "Kết thúc", title: "Trầm mình & Đoàn viên", desc: "Trầm mình sông Tiền Đường, được cứu và tái ngộ gia đình." }
+                ]
+            },
+            'kim': {
+                title: "Kim Trọng",
+                subtitle: "Bậc tài tử đa tình và thủy chung",
+                content: `<p>Kim Trọng đại diện cho khát vọng tình yêu tự do, vượt qua lễ giáo phong kiến. Anh là người trọng tình nghĩa, suốt 15 năm vẫn không nguôi tìm kiếm Kiều, thể hiện một tâm hồn cao thượng và bền bỉ.</p>`
+            },
+            'hai': {
+                title: "Từ Hải",
+                subtitle: "Anh hùng cái thế, khát vọng tự do",
+                content: `<p>Từ Hải không chỉ là một vị tướng oai hùng mà còn là người đem lại công lý cho Kiều. Với Từ Hải, Nguyễn Du đã gửi gắm ước mơ về một người anh hùng dám thách thức mọi gông cùm, sống phóng khoáng và trọng nghĩa khí.</p>`
+            },
+            'hoan': {
+                title: "Hoạn Thư",
+                subtitle: "Trí tuệ và sự ghen tuông bản lĩnh",
+                content: `<p>Hoạn Thư là nhân vật phản diện nhưng đầy thu hút bởi trí tuệ và cách ứng biến thông minh. Sự ghen tuông của Hoạn Thư mang màu sắc của sự toan tính sắc lạnh để bảo vệ danh dự một người phụ nữ quý tộc.</p>`
+            },
+            'so': {
+                title: "Sở Khanh",
+                subtitle: "Sự giả dối đê tiện",
+                content: `<p>Sở Khanh là điển hình của loại lưu manh giả danh tri thức. Hắn lợi dụng lòng tin và tình cảm của người phụ nữ gặp nạn để trục lợi, trở thành cái tên ám ảnh về sự bạc tình trong văn học Việt Nam.</p>`
+            },
+            'van': {
+                title: "Thúy Vân",
+                subtitle: "Biểu tượng của sự bình yên",
+                content: `<p>Khác với Kiều, Thúy Vân mang vẻ đẹp phúc hậu, hài hòa với tự nhiên. Nàng là người thay chị thực hiện lời thề với Kim Trọng, một nhân vật đại diện cho những số phận may mắn, ít sóng gió trong xã hội xưa.</p>`
+            }
+        };
+
+        function openModal(id) {
+            const data = charData[id];
+            const modalBody = document.getElementById('modal-body');
+            
+            let html = `
+                <h2 class="modal-detail-title">${data.title}</h2>
+                <span class="modal-detail-subtitle">${data.subtitle}</span>
+                <div class="modal-body-text">${data.content}</div>
+            `;
+
+            // Kiểm tra và hiển thị Timeline nếu là Thúy Kiều
+            if (data.timeline) {
+                html += `
+                    <div class="timeline-container">
+                        <h3 class="timeline-title">Dòng thời gian cuộc đời</h3>
+                        ${data.timeline.map(item => `
+                            <div class="timeline-item">
+                                <div class="t-period">${item.period}</div>
+                                <div class="t-content">
+                                    <h4>${item.title}</h4>
+                                    <p>${item.desc}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            modalBody.innerHTML = html;
+            document.getElementById('charModal').style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            document.getElementById('charModal').style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('charModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

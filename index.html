@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đại Thi Hào Nguyễn Du | Kiệt Tác Truyện Kiều</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Quicksand:wght@300;500&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section class="hero">
+        <div class="overlay"></div>
+        <div class="bg-landscape"></div>
+        
+        <div class="hero-container">
+            <div class="book-side">
+                <div class="book-wrapper" onclick="showPoem()">
+                    <img src="images/truyen-kieu-than-phan-con-nguoi-va-nhung-tin-hieu.jpg" alt="Bìa Truyện Kiều" class="main-cover">
+                    
+                    <!-- Ô thơ hiện ra khi click -->
+                    <div id="poem-popup" class="poem-popup">
+                        <div class="poem-content">
+                            <span class="close-btn">&times;</span>
+                            
+                            <!-- File âm thanh của bạn -->
+                            <audio id="kiều-audio" src="kim-kieu.mp3"></audio>
+                            <h2 class="poem-main-title">Kim - Kiều gặp gỡ</h2>
+                            <section class="poem-section">
+                                <div id="poem-text-container">
+                                    <span class="poem-line" data-time="0">Nẻo xa mới tỏ mặt người,</span><br>
+                                    <span class="poem-line" data-time="2">Khách đà xuống ngựa tới nơi tự tình.</span><br>
+                                    <span class="poem-line" data-time="4">Hài văn lần bước dặm xanh,</span><br>
+                                    <span class="poem-line" data-time="6">Một vùng như thể cây quỳnh cành dao.</span><br>
+                                    <span class="poem-line" data-time="8">Chàng Vương quen mặt ra chào,</span><br>
+                                    <span class="poem-line" data-time="10">Hai kiều e lệ nép vào dưới hoa.</span><br>
+                                    <span class="poem-line" data-time="12">Nguyên người quanh quát đâu xa,</span><br>
+                                    <span class="poem-line" data-time="14">Họ Kim tên Trọng vốn nhà trâm anh.</span><br>
+                                    <span class="poem-line" data-time="16">Nền phú hậu bậc tài danh,</span><br>
+                                    <span class="poem-line" data-time="18">Văn chương nết đất thông minh tính trời.</span><br>
+                                    <span class="poem-line" data-time="20">Phong tư tài mạo tót vời,</span><br>
+                                    <span class="poem-line" data-time="22">Vào trong phong nhã ra ngoài hào hoa.</span><br>
+                                    <span class="poem-line" data-time="24">[…] Bóng hồng nhác thấy nẻo xa,</span><br>
+                                    <span class="poem-line" data-time="26">Xuân lan thu cúc mặn mà cả hai.</span><br>
+                                    <span class="poem-line" data-time="28">Người quốc sắc kẻ thiên tài,</span><br>
+                                    <span class="poem-line" data-time="30">Tình trong như đã mặt ngoài còn e.</span><br>
+                                    <span class="poem-line" data-time="32">Chập chờn cơn tỉnh cơn mê.</span><br>
+                                    <span class="poem-line" data-time="34">Rốn ngồi chẳng tiện dứt về chỉn khôn.</span><br>
+                                    <span class="poem-line" data-time="36">Bóng tà như giục cơn buồn,</span><br>
+                                    <span class="poem-line" data-time="38">Khách đà lên ngựa người còn nghé theo.</span><br>
+                                    <span class="poem-line" data-time="40">Dưới cầu nước chảy trong veo,</span><br>
+                                    <span class="poem-line" data-time="42">Bên cầu tơ liễu bóng chiều thướt tha.</span><br>
+                                    <span class="poem-line" data-time="44">Kiều từ trở gót trướng hoa,</span><br>
+                                    <span class="poem-line" data-time="46">Mặt trời gác núi chiêng đà thu không.</span><br>
+                                    <span class="poem-line" data-time="48">Gương nga chênh chếch dòm song,</span><br>
+                                    <span class="poem-line" data-time="50">Vàng gieo ngấn nước cây lồng bóng sân.</span><br>
+                                    <span class="poem-line" data-time="52">Hải đường lả ngọn đông lân,</span><br>
+                                    <span class="poem-line" data-time="54">Giọt sương gieo nặng cành xuân la đà.</span><br>
+                                    <span class="poem-line" data-time="56">Một mình lặng ngắm bóng nga,</span><br>
+                                    <span class="poem-line" data-time="58">Rộn đường gần với nỗi xa bời bời:</span><br>
+                                    <span class="poem-line" data-time="60">“Người mà đến thế thì thôi,</span><br>
+                                    <span class="poem-line" data-time="62">Đời phồn hoa cũng là đời bỏ đi!</span><br>
+                                    <span class="poem-line" data-time="64">Người đâu gặp gỡ làm chi,</span><br>
+                                    <span class="poem-line" data-time="66">Trăm năm biết có duyên gì hay không?</span><br>
+                                    <span class="poem-line" data-time="68">Ngổn ngang trăm mối bên lòng,</span><br>
+                                    <span class="poem-line" data-time="70">Nên câu tuyệt diệu ngụ trong tính tình.</span>
+                                </div>
+                            </section>
+                            
+                            <button id="btn-play-audio" class="btn-audio">▶️ NGHE NGÂM THƠ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-side">
+                <h2 class="sub-title">Tác phẩm văn học</h2>
+                <h1 class="main-name">Truyện Kiều</h1>
+                <p class="quote">"Bất tri tam bách dư niên hậu<br>Thiên hạ hà nhân khấp Tố Như?"</p>
+                <a href="#explore" class="cta-button">BẮT ĐẦU TRẢI NGHIỆM</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="content-grid" id="explore">
+        <div class="info-box" data-aos="fade-up">
+            <div class="box-header">01. TÁC GIẢ</div>
+            <h3>Bậc Thầy Ngôn Ngữ</h3>
+            <p>Nguyễn Du (1766–1820) không chỉ là một nhà thơ, ông là linh hồn của tiếng Việt, người đã đưa thể thơ Lục bát lên đỉnh cao chói lọi của nghệ thuật.</p>
+            <button onclick="window.location.href='tg.html'" class="btn-more">KHÁM PHÁ</button>
+        </div>
+
+        <div class="info-box" data-aos="fade-up">
+            <div class="box-header">02. HOÀN CẢNH</div>
+            <h3>Đoạn Trường Tân Thanh</h3>
+            <p>Ra đời trong bối cảnh lịch sử đầy biến động cuối Lê đầu Nguyễn, tác phẩm là tiếng khóc đau đớn cho những kiếp người bạc mệnh.</p>
+            <button onclick="window.location.href='st.html'" class="btn-more">KHÁM PHÁ</button> <!-- Sáng tác -->
+        </div>
+
+        <div class="info-box" data-aos="fade-up">
+            <div class="box-header">03. CỐT TRUYỆN</div>
+            <h3>15 Năm Lưu Lạc</h3>
+            <p>Hành trình từ "êm đềm trướng rủ màn che" đến những kiếp nạn đoạn trường, và cuối cùng là sự giải thoát trong vòng tay sư Giác Duyên.</p>
+            <button onclick="window.location.href='ct.html'" class="btn-more">KHÁM PHÁ</button> <!-- Cốt truyện -->
+        </div>
+
+        <div class="info-box" data-aos="fade-up">
+            <div class="box-header">04. NHÂN VẬT</div>
+            <h3>Thế Giới Nội Tâm</h3>
+            <p>Từ Thúy Kiều, Từ Hải đến Hoạn Thư, mỗi nhân vật đều được khắc họa tâm lý sâu sắc, vượt xa khỏi những khuôn mẫu văn học thời bấy giờ.</p>
+            <button onclick="window.location.href='nv.html'" class="btn-more">KHÁM PHÁ</button> <!-- Nhân vật -->
+        </div>
+    </main>
+    <section class="mega-analysis">
+        <div class="analysis-header">
+            <span class="sub-title">Giải Mã Chi Tiết Đoạn Trích</span>
+            <h2 class="main-title">Kim - Kiều gặp gỡ</h2>
+        </div>
+        <section class="poem-container">
+            <div class="poem-content">
+                Nẻo xa mới tỏ mặt người,<br>
+                Khách đà xuống ngựa tới nơi tự tình.<br>
+                Hài văn lần bước dặm xanh,<br>
+                Một vùng như thể cây quỳnh cành dao.<br>
+                Chàng Vương quen mặt ra chào,<br>
+                Hai kiều e lệ nép vào dưới hoa.<br>
+                Nguyên người quanh quát đâu xa,<br>
+                Họ Kim tên Trọng vốn nhà trâm anh.<br>
+                Nền phú hậu bậc tài danh,<br>
+                Văn chương nết đất thông minh tính trời.<br>
+                Phong tư tài mạo tót vời,<br>
+                Vào trong phong nhã ra ngoài hào hoa.<br>
+                […] Bóng hồng nhác thấy nẻo xa,<br>
+                Xuân lan thu cúc mặn mà cả hai.<br>
+                Người quốc sắc kẻ thiên tài,<br>
+                Tình trong như đã mặt ngoài còn e.<br>
+                Chập chờn cơn tỉnh cơn mê.<br>
+                Rốn ngồi chẳng tiện dứt về chỉn khôn.<br>
+                Bóng tà như giục cơn buồn,<br>
+                Khách đà lên ngựa người còn nghé theo.<br>
+                Dưới cầu nước chảy trong veo,<br>
+                Bên cầu tơ liễu bóng chiều thướt tha.<br>
+                Kiều từ trở gót trướng hoa,<br>
+                Mặt trời gác núi chiêng đà thu không.<br>
+                Gương nga chênh chếch dòm song,<br>
+                Vàng gieo ngấn nước cây lồng bóng sân.<br>
+                Hải đường lả ngọn đông lân,<br>
+                Giọt sương gieo nặng cành xuân la đà.<br>
+                Một mình lặng ngắm bóng nga,<br>
+                Rộn đường gần với nỗi xa bời bời:<br>
+                “Người mà đến thế thì thôi,<br>
+                Đời phồn hoa cũng là đời bỏ đi!<br>
+                Người đâu gặp gỡ làm chi,<br>
+                Trăm năm biết có duyên gì hay không?<br>
+                Ngổn ngang trăm mối bên lòng,<br>
+                Nên câu tuyệt diệu ngụ trong tính tình.
+            </div>
+        </section>
+        <div class="sync-grid-mega">
+            <div class="mega-card" onclick="toggleAnalysis('context')">
+                <div class="card-visual">
+                    <div class="number-bg">01</div>
+                    <h3>HOÀN CẢNH GẶP GỠ</h3>
+                    <p>Khám phá vị trí, không gian và diễn biến tâm lý thực tế.</p>
+                    <div class="click-hint">BẤM ĐỂ MỞ RỘNG LUẬN ĐIỂM</div>
+                </div>
+                
+                <div id="mega-context" class="card-expand">
+                    <div class="expand-inner">
+                        <div class="analysis-point">
+                            <h4>1.1. Vị trí chiến lược trong cốt truyện</h4>
+                            <p>Nằm ở phần đầu "Gặp gỡ và đính ước". Đây là điểm khởi đầu cho chuỗi bi kịch 15 năm lưu lạc, nơi tình yêu vừa chớm nở đã mang theo những dự cảm chia lìa.</p>
+                        </div>
+                        <div class="analysis-point">
+                            <h4>1.2. Không gian "Tả cảnh ngụ tình"</h4>
+                            <p>Buổi chiều tà với "tơ liễu bóng chiều thướt tha". Cảnh vật không chỉ là thiên nhiên mà là nhân hóa của sự vương vấn, báo hiệu một tương lai mỏng manh như cành liễu trước gió.</p>
+                        </div>
+                        <div class="analysis-point">
+                            <h4>1.3. Cuộc hội ngộ định mệnh</h4>
+                            <p>Sự xuất hiện của Kim Trọng ("Hài văn lần bước dặm xanh") tạo nên sự tương phản với vẻ e lệ của chị em Kiều ("Nép vào dưới hoa"). Đó là khoảnh khắc của sự giao thoa giữa "quốc sắc" và "thiên tài".</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mega-card" onclick="toggleAnalysis('art')">
+                <div class="card-visual">
+                    <div class="number-bg">02</div>
+                    <h3>GIÁ TRỊ NGHỆ THUẬT</h3>
+                    <p>Bút pháp ước lệ, ngôn từ và tư tưởng nhân đạo của tác giả.</p>
+                    <div class="click-hint">BẤM ĐỂ MỞ RỘNG LUẬN ĐIỂM</div>
+                </div>
+
+                <div id="mega-art" class="card-expand">
+                    <div class="expand-inner">
+                        <div class="analysis-point">
+                            <h4>2.1. Bút pháp Ước lệ Tượng trưng</h4>
+                            <p>Nguyễn Du dùng "Cây quỳnh cành dao", "Xuân lan thu cúc" để miêu tả nhân vật. Cách dùng từ ngữ đắt giá này không chỉ tả vẻ đẹp mà còn tôn vinh nhân phẩm cao quý của họ.</p>
+                        </div>
+                        <div class="analysis-point">
+                            <h4>2.2. Ngôn ngữ Nội tâm & Tu từ</h4>
+                            <p>Câu hỏi "Trăm năm biết có duyên gì hay không?" là đỉnh cao của nghệ thuật khắc họa tâm lý. Kiều không chỉ yêu, nàng còn lo âu cho số phận, thể hiện tư duy vượt thời đại.</p>
+                        </div>
+                        <div class="analysis-point">
+                            <h4>2.3. Nhịp điệu Lục bát bậc thầy</h4>
+                            <p>Cách ngắt nhịp uyển chuyển tạo nên nhạc điệu du dương, khiến đoạn trích như một bản nhạc giao hưởng về tình yêu, đồng thời giữ vững hồn cốt của văn hóa dân tộc Việt Nam.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- PHẦN CHÂN TRANG MỚI THÊM -->
+        <footer class="site-footer">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <p class="design-by">Thiết kế bởi: <span>Bộ Phận Chuyên Môn Trường TH&THCS Việt Dân</span></p>
+                <p class="contact-email">Liên hệ: <a href="tranduyhieu302012@gmail.com">tranduyhieu302012@gmail.com</a></p>
+                <p class="copyright">© 2024 Hành trình di sản Truyện Kiều</p>
+            </div>
+        </footer>
+    <script src="script.js"></script>
+</body>
+</html>

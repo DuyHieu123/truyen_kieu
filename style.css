@@ -1,0 +1,421 @@
+:root {
+    --gold: #c5a059;
+    --dark: #ffd3d3;
+    --gray: #ffe6e6;
+    --text: #000000;
+}
+
+body {
+    margin: 0;
+    background-color: var(--dark);
+    color: var(--text);
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-landscape {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=2070') center/cover;
+    filter: blur(10px) grayscale(50%);
+    opacity: 0.4;
+    z-index: -2;
+}
+
+.overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent, var(--dark));
+    z-index: -1;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    max-width: 1200px;
+    padding: 0 40px;
+}
+
+.main-cover {
+    width: 320px;
+    border-radius: 4px;
+    box-shadow: 20px 20px 60px rgba(255, 159, 183, 0.8), 
+                -5px -5px 20px rgba(197, 160, 89, 0.2);
+    transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.main-cover:hover {
+    transform: translateY(-20px) rotateY(-10deg);
+}
+
+.sub-title {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    letter-spacing: 4px;
+    font-size: 0.9rem;
+}
+
+.main-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    margin: 10px 0;
+    line-height: 1;
+}
+
+.quote {
+    font-style: italic;
+    color: #ffffff;
+    border-left: 2px solid var(--gold);
+    padding-left: 20px;
+    margin: 30px 0;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 18px 40px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: bold;
+    transition: 0.4s;
+}
+
+.cta-button:hover {
+    background: var(--gold);
+    color: var(--dark);
+    box-shadow: 0 0 30px rgba(197, 160, 89, 0.4);
+}
+
+/* --- GRID CONTENT --- */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px; /* Tạo đường kẻ mảnh giữa các ô */
+    background-color: #ffffff;
+    padding-bottom: 100px;
+}
+
+.info-box {
+    background-color: var(--dark);
+    padding: 80px;
+    transition: 0.5s;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.info-box:hover {
+    background-color: var(--gray);
+}
+
+.box-header {
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.info-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.info-box p {
+    color: #999;
+    line-height: 1.8;
+}
+
+.btn-more {
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--gold);
+    color: var(--gold);
+    padding: 10px 0;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+    .hero-container { flex-direction: column; text-align: center; }
+    .main-name { font-size: 3rem; }
+    .content-grid { grid-template-columns: 1fr; }
+    .info-box { padding: 40px; }
+}
+/* --- FOOTER SECTION --- */
+.site-footer {
+    background-color: var(--dark);
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.footer-line {
+    width: 100px;
+    height: 1px;
+    background-color: var(--gold);
+    margin: 0 auto 30px;
+    opacity: 0.5;
+}
+
+.footer-content p {
+    margin: 10px 0;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    color: #666;
+}
+
+.design-by span {
+    color: var(--gold);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.contact-email a {
+    color: var(--text);
+    text-decoration: none;
+    transition: 0.3s;
+    border-bottom: 1px dashed #444;
+}
+
+.contact-email a:hover {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+}
+
+.copyright {
+    font-size: 0.7rem !important;
+    margin-top: 30px !important;
+    opacity: 0.5;
+}
+
+/* Hiệu ứng mượt cho footer khi cuộn xuống */
+.site-footer {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.8s ease-out;
+}
+
+.site-footer.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Container ảnh bìa cần có position relative */
+.book-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Ẩn ô thơ mặc định */
+.poem-popup {
+    display: none; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    z-index: 100;
+    border: 1px solid #d4af37; /* Màu vàng đồng nhẹ */
+}
+
+/* Nội dung chữ trong ô thơ */
+.poem-content {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #2c3e50;
+    line-height: 1.8;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+/* Nút đóng ô thơ */
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    color: #888;
+    cursor: pointer;
+}
+
+/* Hiệu ứng khi hiện lên */
+.show-poem {
+    display: block !important;
+    animation: fadeInScale 0.4s ease-out;
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.poem-line.speaking {
+    color: #e67e22;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(230, 126, 34, 0.3);
+    transition: all 0.1s ease;
+}
+/* 1. Làm cho khung popup to lên */
+.poem-popup {
+    display: none; /* Giữ nguyên để JS điều khiển */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;         /* Tăng chiều rộng lên 80% màn hình */
+    max-width: 900px;    /* Chiều rộng tối đa */
+    height: 85vh;        /* Tăng chiều cao lên 85% màn hình */
+    background: #fffafa; /* Màu nền giấy cổ */
+    z-index: 1000;
+    padding: 40px;
+    border: 2px solid #000;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border-radius: 8px;
+    overflow: hidden;    /* Để bo góc không bị nội dung tràn ra */
+}
+
+/* 2. Tùy chỉnh phần nội dung bên trong để có thể cuộn */
+.poem-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 3. Khung chứa chữ thơ (có thanh cuộn) */
+.poem-section {
+    flex-grow: 1;        /* Chiếm hết không gian còn lại */
+    overflow-y: auto;    /* Hiện thanh cuộn khi thơ dài */
+    padding: 20px;
+    margin-bottom: 20px;
+    scrollbar-width: thin; /* Thanh cuộn tinh tế cho Firefox */
+    scrollbar-color: #ffc7c7 #fff;
+}
+
+/* 4. Định dạng chữ thơ cho to và đẹp */
+#poem-text-container {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;    /* Tăng cỡ chữ thơ */
+    line-height: 2.2;
+    text-align: center;
+}
+
+/* 5. Nút đóng cho to và dễ bấm */
+.close-btn {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    font-size: 40px;
+    cursor: pointer;
+    color: #333;
+    transition: 0.3s;
+    z-index: 1001;
+}
+
+.close-btn:hover {
+    color: #ff4e89;
+}
+
+/* 6. Nút bấm nghe nhạc cố định ở dưới cùng */
+.btn-audio {
+    background: #000;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    width: fit-content;
+    margin: 0 auto;
+    transition: 0.3s;
+}
+
+.btn-audio:hover {
+    background: #ff5d93;
+    transform: translateY(-3px);
+}
+
+/* Tùy chỉnh thanh cuộn cho trình duyệt Chrome/Safari */
+.poem-section::-webkit-scrollbar {
+    width: 6px;
+}
+.poem-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.poem-section::-webkit-scrollbar-thumb {
+    background: #ffc7c7;
+    border-radius: 10px;
+}
+.mega-analysis { padding: 100px 10%; background: #fff; }
+.analysis-header { text-align: center; margin-bottom: 60px; }
+.analysis-header .sub-title { color: var(--accent); letter-spacing: 5px; font-weight: bold; }
+.analysis-header .main-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-top: 10px; }
+
+.sync-grid-mega {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.mega-card {
+    background: #fdfdfd;
+    border: 2px solid #000;
+    cursor: pointer;
+    transition: 0.4s;
+    overflow: hidden;
+}
+
+.card-visual {
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+}
+
+.number-bg {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    position: absolute;
+    top: 10px; left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.1;
+    color: var(--accent);
+}
+
+.mega-card h3 { font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 15px; position: relative; }
+.mega-card p { font-family: 'Quicksand', sans-serif; color: #666; }
+.click-hint { margin-top: 25px; font-weight: bold; font-size: 0.7rem; letter-spacing: 2px; color: var(--accent); }
+
+/* Hiệu ứng mở rộng */
+.card-expand {
+    max-height: 0;
+    transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #fff;
+    border-top: 0px solid #000;
+}
+
+.card-expand.active {
+    max-height: 1000px; /* Độ dài tùy ý */
+    border-top: 2px solid #000;
+}
+
+.expand-inner { padding: 40px; }
+.analysis-point { margin-bottom: 30px; border-left: 3px solid var(--accent); padding-left: 20px; }
+.analysis-point h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 10px; }
+.analysis-point p { font-size: 1rem; line-height: 1.8; color: #333; }
+
+.mega-card:hover { box-shadow: 20px 20px 0px var(--bg-main); transform: translate(-5px, -5px); }
